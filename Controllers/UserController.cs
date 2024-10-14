@@ -19,5 +19,11 @@ namespace QLDD.Controllers
         {
             return Ok(await _userService.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<UserDTORes>>> GetOne(int id)
+        {
+            return Ok(await _userService.GetById(id));
+        }
     }
 }
