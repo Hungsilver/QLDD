@@ -46,6 +46,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+// Use CORS- required
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
