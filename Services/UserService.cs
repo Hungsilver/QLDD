@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using QLDD.Data;
 using QLDD.Dtos.Response;
+using QLDD.Models;
 using QLDD.Services.Interface;
 
 namespace QLDD.Services
@@ -20,7 +21,16 @@ namespace QLDD.Services
 
         public async Task<IEnumerable<UserDTORes>> GetAll()
         {
-            return _mapper.Map<IEnumerable<UserDTORes>>(await _context.Users.ToListAsync());
+            return _mapper.Map<IEnumerable<UserDTORes>>(
+                await _context
+                .Users
+                .Include(u=>u.PermanentAddress)
+                .Include(u=>u.TemporaryAddress)
+                .ToListAsync());
+        }
+        public async Task<IEnumerable<User>> GetAllNoDTO()
+        {
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<UserDTORes> GetById(int id)

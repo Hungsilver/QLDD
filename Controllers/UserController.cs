@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QLDD.Dtos.Response;
+using QLDD.Models;
 using QLDD.Services.Interface;
 
 namespace QLDD.Controllers
@@ -18,6 +19,11 @@ namespace QLDD.Controllers
         public async Task<ActionResult<IEnumerable<UserDTORes>>> GetAll()
         {
             return Ok(await _userService.GetAll());
+        }
+        [HttpGet("notdto")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllRoot()
+        {
+            return Ok(await _userService.GetAllNoDTO());
         }
 
         [HttpGet("{id}")]
