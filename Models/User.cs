@@ -7,6 +7,9 @@ namespace QLDD.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
+        [StringLength(20)]
+        public required string Code { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
         [StringLength(50)]
@@ -31,8 +34,12 @@ namespace QLDD.Models
         [StringLength(100)]
         public string? IssuePlace { get; set; }
         public int? Role { get; set; } //0.Cá nhân, 1.Cơ quan tiếp nhận, 2.Cơ quan thẩm định
-        public int? AddressID { get; set; }
+        public int? PermanentAddressID { get; set; }
+        public int? TemporaryAddressID { get; set; }
         public int? IdentificationID { get; set; }
         public int Status { get; set; }
+        public Address? PermanentAddress { get; set; } // dc thuong tru
+        public Address? TemporaryAddress { get; set; } // dc tam tru
+
     }
 }

@@ -22,7 +22,7 @@ namespace QLDD.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("QLDD.Models.User", b =>
+            modelBuilder.Entity("QLDD.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,8 +30,42 @@ namespace QLDD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AddressID")
+                    b.Property<string>("AddressDetail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("District")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hamlet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ward")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WardCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("QLDD.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
@@ -41,6 +75,11 @@ namespace QLDD.Migrations
 
                     b.Property<int?>("BirthYear")
                         .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("FirstMidName")
                         .HasMaxLength(50)
@@ -81,6 +120,9 @@ namespace QLDD.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("PermanentAddressID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Role")
                         .HasColumnType("int");
 
@@ -91,6 +133,9 @@ namespace QLDD.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int?>("TemporaryAddressID")
+                        .HasColumnType("int");
+
                     b.Property<int>("TypeOfIdentificationDocs")
                         .HasColumnType("int");
 
@@ -99,7 +144,30 @@ namespace QLDD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.HasIndex("PermanentAddressID")
+                        .IsUnique()
+                        .HasFilter("[PermanentAddressID] IS NOT NULL");
+
+                    b.HasIndex("TemporaryAddressID")
+                        .IsUnique()
+                        .HasFilter("[TemporaryAddressID] IS NOT NULL");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("QLDD.Models.User", b =>
+                {
+                    b.HasOne("QLDD.Models.Address", "PermanentAddress")
+                        .WithOne()
+                        .HasForeignKey("QLDD.Models.User", "PermanentAddressID");
+
+                    b.HasOne("QLDD.Models.Address", "TemporaryAddress")
+                        .WithOne()
+                        .HasForeignKey("QLDD.Models.User", "TemporaryAddressID");
+
+                    b.Navigation("PermanentAddress");
+
+                    b.Navigation("TemporaryAddress");
                 });
 #pragma warning restore 612, 618
         }
