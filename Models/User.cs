@@ -7,6 +7,8 @@ namespace QLDD.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string? Username { get; set; }
+        public string? Password { get; set; }
         [StringLength(50)]
         public string? FirstMidName { get; set; }
         public string? LastName { get; set; }
@@ -27,6 +29,7 @@ namespace QLDD.Models
         public DateTime? IssueDate { get; set; }
         [StringLength(100)]
         public string? IssuePlace { get; set; }
+        public int? Role { get; set; } //0.Cá nhân, 1.Cơ quan tiếp nhận, 2.Cơ quan thẩm định
         public int? AddressID { get; set; }
         public int? IdentificationID { get; set; }
         public int Status { get; set; }
