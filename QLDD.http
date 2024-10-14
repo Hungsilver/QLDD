@@ -1,0 +1,6 @@
+@QLDD_HostAddress = http://localhost:5220
+
+GET {{QLDD_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
