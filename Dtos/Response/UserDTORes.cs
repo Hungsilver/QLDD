@@ -1,15 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QLDD.Models
+namespace QLDD.Dtos.Response
 {
-    public class User
+    public class UserDTORes
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
-        [StringLength(50)]
         public string? FirstMidName { get; set; }
         public string? LastName { get; set; }
         public DateTime? BirthDate { get; set; }
