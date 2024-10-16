@@ -20,11 +20,6 @@ namespace QLDD.Controllers
         {
             return Ok(await _userService.GetAll());
         }
-        [HttpGet("notdto")]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllRoot()
-        {
-            return Ok(await _userService.GetAllNoDTO());
-        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<UserDTORes>>> GetOne(int id)

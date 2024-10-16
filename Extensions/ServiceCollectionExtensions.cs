@@ -8,6 +8,7 @@ namespace QLDD.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDocumentService, DocumentService>();
             return services;
         }
     }

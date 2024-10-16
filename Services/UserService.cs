@@ -28,11 +28,6 @@ namespace QLDD.Services
                 .Include(u=>u.TemporaryAddress)
                 .ToListAsync());
         }
-        public async Task<IEnumerable<User>> GetAllNoDTO()
-        {
-            return await _context.Users.ToListAsync();
-        }
-
         public async Task<UserDTORes> GetById(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
