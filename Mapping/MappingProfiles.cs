@@ -8,6 +8,7 @@ namespace QLDD.Mapping
     {
         public MappingProfiles() {
             CreateMap<User, UserDTORes>();
+            CreateMap<Document, DocumentDTORes>();
         }
     }
 }
